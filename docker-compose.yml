@@ -1,0 +1,34 @@
+
+version: '3.8'
+services:
+  api-testes:
+    build:
+      context: .
+      dockerfile: apps/apis/api-testes/src/Dockerfile
+      target: development
+    environment:
+      - REDIS_URL="redis://host.docker.internal:6379"
+    ports:
+      - 5001:5001
+    extra_hosts:
+        - "host.docker.internal:host-gateway"
+        - localhost:192.168.100.231
+    expose:
+      - "6379"
+    restart: on-failure
+    volumes:
+      - .:/app
+      - testes_api_vol:/usr/src/testes_api/
+      - node_modules:/usr/src/node_modules/
+    networks:
+      - monorepo_net
+
+
+volumes:
+  testes_api_vol:
+  node_modules:
+
+networks:
+  monorepo_net:
+    driver: bridge
+

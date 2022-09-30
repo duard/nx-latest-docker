@@ -14,7 +14,7 @@
           "test",
           "e2e"
         ],
-        "accessToken": "MDJmNTVlNjgtOTljOS00YzVhLThiZDMtM2MzYWJjM2YxNWYwfHJlYWQtd3JpdGU="
+        "accessToken": "MDM5ZjM3ZGQtNzAwMS00NTcyLTlmYTQtZjcxZTY4ZTNjNWM2fHJlYWQtd3JpdGU="
       }
     }
   },
@@ -27,6 +27,19 @@
         "production",
         "^production"
       ]
+    },
+    "test": {
+      "inputs": [
+        "default",
+        "^production",
+        "{workspaceRoot}/jest.preset.js"
+      ]
+    },
+    "lint": {
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json"
+      ]
     }
   },
   "namedInputs": {
@@ -35,8 +48,13 @@
       "sharedGlobals"
     ],
     "production": [
-      "default"
+      "default",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/jest.config.[jt]s",
+      "!{projectRoot}/.eslintrc.json"
     ],
     "sharedGlobals": []
-  }
+  },
+  "defaultProject": "api-testes"
 }
